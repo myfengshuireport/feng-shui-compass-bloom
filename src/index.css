@@ -8,51 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Feng Shui inspired color palette - Gold and Red theme */
+    --background: 45 15% 97%;
+    --foreground: 0 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 45 25% 96%;
+    --card-foreground: 0 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 45 25% 96%;
+    --popover-foreground: 0 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 70% 50%; /* Deep red */
+    --primary-foreground: 45 100% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 45 80% 85%; /* Light gold */
+    --secondary-foreground: 0 15% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 45 30% 92%;
+    --muted-foreground: 0 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 100% 75%; /* Rich gold */
+    --accent-foreground: 0 15% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 45 25% 85%;
+    --input: 45 25% 90%;
+    --ring: 45 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Feng Shui gold button */
+    --gold: 45 100% 60%;
+    --gold-foreground: 0 15% 15%;
+    --gold-hover: 45 100% 55%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Prosperity red accent */
+    --prosperity: 0 85% 45%;
+    --prosperity-foreground: 45 100% 95%;
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 45 20% 95%;
+    --sidebar-foreground: 0 15% 20%;
+    --sidebar-primary: 0 70% 50%;
+    --sidebar-primary-foreground: 45 100% 95%;
+    --sidebar-accent: 45 50% 90%;
+    --sidebar-accent-foreground: 0 15% 15%;
+    --sidebar-border: 45 25% 85%;
+    --sidebar-ring: 45 100% 50%;
   }
 
   .dark {
@@ -100,6 +103,72 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .feng-shui-bg {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%);
+    position: relative;
+  }
+
+  .feng-shui-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 80%, hsl(var(--accent) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--prosperity) / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, hsl(var(--accent) / 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .gold-button {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-hover)) 100%);
+    color: hsl(var(--gold-foreground));
+    border: 1px solid hsl(var(--gold));
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px hsl(var(--gold) / 0.3);
+  }
+
+  .gold-button:hover {
+    background: linear-gradient(135deg, hsl(var(--gold-hover)) 0%, hsl(var(--gold)) 100%);
+    box-shadow: 0 6px 20px hsl(var(--gold) / 0.4);
+    transform: translateY(-1px);
+  }
+
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
   }
 }
